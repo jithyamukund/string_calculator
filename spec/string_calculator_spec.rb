@@ -131,6 +131,31 @@ describe StringCalculator do
           result = StringCalculator.new.add('//"\n11"20"100"10"1"1')
           expect(result).to eq(143)
         end
+
+        it "returns 143 when delimiter is . " do
+          result = StringCalculator.new.add('//.\n11.20.100.10.1.1')
+          expect(result).to eq(143)
+        end
+      end
+    end
+
+    context "when input string has negative numbers" do
+      it "throws exception 'negatives not allowed' " do
+        expect do
+          StringCalculator.new.add('//;\n11;-20;100;10;1;1')
+        end.to raise_error(ArgumentError, "negatives not allowed")
+      end
+
+      it "throws exception 'negatives not allowed' " do
+        expect do
+          StringCalculator.new.add('-2')
+        end.to raise_error(ArgumentError, "negatives not allowed")
+      end
+
+      it "throws exception 'negatives not allowed' " do
+        expect do
+          StringCalculator.new.add('1,-2')
+        end.to raise_error(ArgumentError, "negatives not allowed")
       end
     end
   end

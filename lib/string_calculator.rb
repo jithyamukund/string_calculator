@@ -9,6 +9,8 @@ class StringCalculator
       else
         numbers = input.split(/[',','\\n']/).map{|n| n.to_i}
       end
+
+      raise ArgumentError, "negatives not allowed" if numbers.any? { |num| num < 0 }
       numbers.sum
     end
   end
