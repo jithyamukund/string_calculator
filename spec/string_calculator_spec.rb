@@ -44,6 +44,19 @@ describe StringCalculator do
           expect(result).to eq(11)
         end
       end
+
+      context "when input string is seperated by \\n " do
+        it 'returns 31' do
+          result = StringCalculator.new.add('11\n20')
+          expect(result).to eq(31)
+        end
+
+        it 'returns 11 when included 0 in input string' do
+          result = StringCalculator.new.add('11\n0')
+          expect(result).to eq(11)
+        end
+
+      end
     end
 
     context "n numbers" do
@@ -65,6 +78,18 @@ describe StringCalculator do
         it "returns 9 when input is '2,0,0,7'" do
           result = StringCalculator.new.add('2,0,0,7')
           expect(result).to eq(9)
+        end
+      end
+
+      context "when input string is seperated by \\n " do
+        it 'returns 141' do
+          result = StringCalculator.new.add('11\n20,100\n10')
+          expect(result).to eq(141)
+        end
+
+        it 'returns 133 when included 0 in input string' do
+          result = StringCalculator.new.add('11\n20,100\n0\n1,1')
+          expect(result).to eq(133)
         end
       end
     end
