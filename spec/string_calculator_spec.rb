@@ -21,6 +21,13 @@ describe StringCalculator do
         result = StringCalculator.new.add('5')
         expect(result).to eq(5)
       end
+
+      context "when input has different delimiters" do
+        it "returns 143 when delimiter is ';' " do
+          result = StringCalculator.new.add('//;\n143')
+          expect(result).to eq(143)
+        end
+      end
     end
 
     context 'two numbers' do
@@ -55,7 +62,13 @@ describe StringCalculator do
           result = StringCalculator.new.add('11\n0')
           expect(result).to eq(11)
         end
+      end
 
+      context "when input has different delimiters" do
+        it "returns 143 when delimiter is ';' " do
+          result = StringCalculator.new.add('//;\n141;2')
+          expect(result).to eq(143)
+        end
       end
     end
 
@@ -90,6 +103,33 @@ describe StringCalculator do
         it 'returns 133 when included 0 in input string' do
           result = StringCalculator.new.add('11\n20,100\n0\n1,1')
           expect(result).to eq(133)
+        end
+      end
+
+      context "when input has different delimiters" do
+        it "returns 143 when delimiter is ';' " do
+          result = StringCalculator.new.add('//;\n11;20;100;10;1;1')
+          expect(result).to eq(143)
+        end
+
+        it "returns 143 when delimiter is ',' " do
+          result = StringCalculator.new.add('//,\n11,20,100,10,1,1')
+          expect(result).to eq(143)
+        end
+
+        it "returns 143 when delimiter is '//' " do
+          result = StringCalculator.new.add('////\n11//20//100//10//1//1')
+          expect(result).to eq(143)
+        end
+
+        it "returns 143 when delimiter is '-' " do
+          result = StringCalculator.new.add('//-\n11-20-100-10-1-1')
+          expect(result).to eq(143)
+        end
+
+        it "returns 143 when delimiter is \" " do
+          result = StringCalculator.new.add('//"\n11"20"100"10"1"1')
+          expect(result).to eq(143)
         end
       end
     end

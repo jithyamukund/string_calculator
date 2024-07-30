@@ -3,7 +3,12 @@ class StringCalculator
     if input.empty?
       0
     else
-      numbers = input.split(/[',','\\n']/).map{|n| n.to_i}
+      if input.start_with?("//")
+        delimiter = input.split('\n')[0][2..-1]
+        numbers = input.split('\n')[1].split("#{delimiter}").map{|n| n.to_i}
+      else
+        numbers = input.split(/[',','\\n']/).map{|n| n.to_i}
+      end
       numbers.sum
     end
   end
