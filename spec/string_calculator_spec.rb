@@ -24,7 +24,7 @@ describe StringCalculator do
 
       context "when input has different delimiters" do
         it "returns 143 when delimiter is ';' " do
-          result = StringCalculator.new.add('//;\n143')
+          result = StringCalculator.new.add('//[;]\n143')
           expect(result).to eq(143)
         end
       end
@@ -66,7 +66,7 @@ describe StringCalculator do
 
       context "when input has different delimiters" do
         it "returns 143 when delimiter is ';' " do
-          result = StringCalculator.new.add('//;\n141;2')
+          result = StringCalculator.new.add('//[;]\n141;2')
           expect(result).to eq(143)
         end
       end
@@ -108,55 +108,79 @@ describe StringCalculator do
 
       context "when input has different delimiters" do
         it "returns 143 when delimiter is ';' " do
-          result = StringCalculator.new.add('//;\n11;20;100;10;1;1')
+          result = StringCalculator.new.add('//[;]\n11;20;100;10;1;1')
           expect(result).to eq(143)
         end
 
         it "returns 143 when delimiter is ',' " do
-          result = StringCalculator.new.add('//,\n11,20,100,10,1,1')
+          result = StringCalculator.new.add('//[,]\n11,20,100,10,1,1')
           expect(result).to eq(143)
         end
 
         it "returns 143 when delimiter is '//' " do
-          result = StringCalculator.new.add('////\n11//20//100//10//1//1')
+          result = StringCalculator.new.add('//[//]\n11//20//100//10//1//1')
           expect(result).to eq(143)
         end
 
         it "returns 143 when delimiter is '-' " do
-          result = StringCalculator.new.add('//-\n11-20-100-10-1-1')
+          result = StringCalculator.new.add('//[-]\n11-20-100-10-1-1')
           expect(result).to eq(143)
         end
 
         it "returns 143 when delimiter is \" " do
-          result = StringCalculator.new.add('//"\n11"20"100"10"1"1')
+          result = StringCalculator.new.add('//["]\n11"20"100"10"1"1')
           expect(result).to eq(143)
         end
 
         it "returns 143 when delimiter is . " do
-          result = StringCalculator.new.add('//.\n11.20.100.10.1.1')
+          result = StringCalculator.new.add('//[.]\n11.20.100.10.1.1')
           expect(result).to eq(143)
         end
       end
     end
 
     context "when input string has negative numbers" do
-      it "throws exception 'negatives not allowed' " do
+      it "throws exception 'negatives not allowed' when input is 11,-20,100,10,1,1 " do
         expect do
-          StringCalculator.new.add('//;\n11;-20;100;10;1;1')
+          StringCalculator.new.add('//[;]\n11;-20;100;10;1;1')
         end.to raise_error(ArgumentError, "negatives not allowed")
       end
 
-      it "throws exception 'negatives not allowed' " do
+      it "throws exception 'negatives not allowed' when input is -2 " do
         expect do
           StringCalculator.new.add('-2')
         end.to raise_error(ArgumentError, "negatives not allowed")
       end
 
-      it "throws exception 'negatives not allowed' " do
+      it "throws exception 'negatives not allowed' when input is 1,-2 " do
         expect do
           StringCalculator.new.add('1,-2')
         end.to raise_error(ArgumentError, "negatives not allowed")
       end
+
+      it "throws exception 'negatives not allowed' when input is -1001 " do
+        expect do
+          StringCalculator.new.add('-1001')
+        end.to raise_error(ArgumentError, "negatives not allowed")
+      end
+    end
+
+    context "when input string has numbers bigger than 1000" do
+      it "returns 2 when input string is 2 and 1001 " do
+        result = StringCalculator.new.add('//[;]\n1001;2')
+        expect(result).to eq(2)
+      end
+
+      it "returns 1002 when input string is 2, 1000, 10000 and 1001 " do
+        result = StringCalculator.new.add('//[;]\n1001;2;1000;10000')
+        expect(result).to eq(1002)
+      end
+
+      it "returns 0 when input string is 1001 " do
+        result = StringCalculator.new.add('1001')
+        expect(result).to eq(0)
+      end
+
     end
   end
 end
