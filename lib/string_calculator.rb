@@ -1,9 +1,10 @@
 class StringCalculator
-  def add(number)
-    if number.empty?
+  def add(input)
+    if input.empty?
       0
     else
-      number.to_i
+      numbers = input.split(',').map{|n| n.to_i}
+      numbers.sum
     end
   end
 end
