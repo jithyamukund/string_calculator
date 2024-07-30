@@ -106,7 +106,7 @@ describe StringCalculator do
         end
       end
 
-      context "when input has different delimiters" do
+      context "when input has default delimiters" do
         it "returns 143 when delimiter is ';' " do
           result = StringCalculator.new.add('//[;]\n11;20;100;10;1;1')
           expect(result).to eq(143)
@@ -139,6 +139,13 @@ describe StringCalculator do
 
         it "returns 6 when delimiter is *** " do
           result = StringCalculator.new.add('//[***]\n1***2***3')
+          expect(result).to eq(6)
+        end
+      end
+
+      context "when input has multiple delimiters" do
+        it "returns 6 when delimiters are * and % " do
+          result = StringCalculator.new.add('//[*][%]\n1*2%3')
           expect(result).to eq(6)
         end
       end

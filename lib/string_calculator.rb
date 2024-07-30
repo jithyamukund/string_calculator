@@ -4,8 +4,10 @@ class StringCalculator
       0
     else
       if input.start_with?("//")
-        delimiter = input.split('\n')[0][3..-2]
-        numbers = input.split('\n')[1].split("#{delimiter}").map{|n| n.to_i}
+        delimiter = input.split('\n')[0][3..-2].split('][')
+        escaped_delimiters = delimiter.map { |d| Regexp.escape(d) }.join
+        regex = Regexp.new("[#{escaped_delimiters}]")
+        numbers = input.split('\n')[1].split(regex).map{|n| n.to_i}
       else
         numbers = input.split(/[',','\\n']/).map{|n| n.to_i}
       end
