@@ -136,6 +136,11 @@ describe StringCalculator do
           result = StringCalculator.new.add('//[.]\n11.20.100.10.1.1')
           expect(result).to eq(143)
         end
+
+        it "returns 6 when delimiter is *** " do
+          result = StringCalculator.new.add('//[***]\n1***2***3')
+          expect(result).to eq(6)
+        end
       end
     end
 
@@ -180,7 +185,6 @@ describe StringCalculator do
         result = StringCalculator.new.add('1001')
         expect(result).to eq(0)
       end
-
     end
   end
 end
