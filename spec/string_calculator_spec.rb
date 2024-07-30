@@ -15,5 +15,12 @@ describe StringCalculator do
         expect(result).to eq(1)
       end
     end
+
+    context "when input string is '5'" do
+      it 'returns 5' do
+        result = StringCalculator.new.add('5')
+        expect(result).to eq(5)
+      end
+    end
   end
 end
