@@ -148,6 +148,11 @@ describe StringCalculator do
           result = StringCalculator.new.add('//[*][%]\n1*2%3')
           expect(result).to eq(6)
         end
+
+        it "returns value when multiple lengthy delimiters provided" do
+          result = StringCalculator.new.add('//[*****************][**][--]\n1*****************2**3--4')
+          expect(result).to eq(10)
+        end
       end
     end
 
