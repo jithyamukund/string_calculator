@@ -45,5 +45,28 @@ describe StringCalculator do
         end
       end
     end
+
+    context "n numbers" do
+      context "when input string is '2,4,6,7'" do
+        it 'returns 19' do
+          result = StringCalculator.new.add('2,4,6,7')
+          expect(result).to eq(19)
+        end
+      end
+
+      context "when input string is '2,4,6,7,10,100,1000'" do
+        it 'returns 1129' do
+          result = StringCalculator.new.add('2,4,6,7,10,100,1000')
+          expect(result).to eq(1129)
+        end
+      end
+
+      context "when input string has 0 " do
+        it "returns 9 when input is '2,0,0,7'" do
+          result = StringCalculator.new.add('2,0,0,7')
+          expect(result).to eq(9)
+        end
+      end
+    end
   end
 end
